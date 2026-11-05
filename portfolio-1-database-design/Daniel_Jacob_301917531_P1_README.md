@@ -31,3 +31,22 @@ The system covers one hotel, fictional guest records, room management, room avai
 ## Assumptions to confirm
 
 The proposed design assumes one hotel, one room per reservation, unique guest email addresses, and five reservation statuses. It also assumes that overlapping active bookings are prohibited and that cancelled or completed reservations remain in the database for historical records.
+
+## Design and implementation files
+| File | Contents |
+|---|---|
+| [Design](Daniel_Jacob_301917531_P1_Design.md) | Database design and explanation. |
+ER diagram	Entity relationships between guests, rooms and reservations.
+Normalisation	Normalisation process and table structure.
+Schema	PostgreSQL SQL statements for creating the three database tables and their constraints.
+Sample data	SQL statements for inserting fictional guest, room and reservation records.
+Constraint tests	SQL statements for testing database constraints using valid and invalid records.
+Screenshots	Directory containing the saved project screenshots.
+
+Implementation
+The database was implemented using PostgreSQL 16 in a GitHub Codespace environment. The database is named hotel_reservation_portfolio. The schema contains three tables: guest, room and reservation. Primary keys uniquely identify records, while foreign keys connect reservations to existing guests and rooms.
+
+The implementation includes NOT NULL, UNIQUE, CHECK and FOREIGN KEY constraints. It also uses a PostgreSQL exclusion constraint to prevent overlapping active reservations for the same room. Sample records were inserted using SampleData.sql, and the constraints were tested by executing ConstraintTests.sql with psql after starting the PostgreSQL service.
+Test results
+The constraint test produced the expected results for all 16 test cases. Tests 1–15 were rejected, covering missing required values, duplicate guest emails and IDs, duplicate room numbers, invalid room types and statuses, missing reservation references, invalid booking dates, invalid reservation status and overlapping active reservations. Test 16 was accepted because a cancelled reservation is permitted to overlap an existing active booking.
+The final row-count query returned 3 guests, 4 rooms and 6 reservations. This confirms that the original five reservations remained and the accepted cancelled reservation was added.
